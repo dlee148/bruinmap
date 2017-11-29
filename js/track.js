@@ -13,6 +13,11 @@ function uploadCoords(position) {
   });
 }
 
+function callPeriodicFunctions() {
+  getLocation();
+  retrievePoints();
+}
+
 function getLocation() {
   navigator.geolocation.getCurrentPosition(uploadCoords);
 }
@@ -22,11 +27,6 @@ function retrievePoints() {
   $.get("php/retrieve-points.php", null, function(data, status, xhr) {
     console.log("Retrieve - " + String(xhr.status));
   });
-}
-
-function callPeriodicFunctions() {
-  getLocation();
-  retrievePoints();
 }
 
 $(document).ready(function() {
