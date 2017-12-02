@@ -1,0 +1,25 @@
+#map {
+  height: 300px;
+  border-radius: 6px;
+  border: 1px solid black;
+}
+
+#filters {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+#footer {
+  background-color: grey;
+  color: white;
+  padding: 15px;
+  font-size: 8px;
+}
+
+.top-buffer {
+  margin-top: 30px;
+}
+
+.submit-btn {
+  margin-top: 12px;
+}

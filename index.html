@@ -6,32 +6,94 @@
   <title>BruinMap</title>
 
   <!-- jQuery  -->
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 
   <!-- BootStrap -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-  <!-- D3.js (graphing library) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.js" integrity="sha256-xOOIPEIJM2Hn3GVaZs+VnM9J3rtaeUuHcHRXuJNO+JU=" crossorigin="anonymous"></script>
-
   <!-- Custom JS  -->
   <script src="js/track.js"></script>
 
   <!-- Custom Styles  -->
-  <link rel="stylesheet" href="css/bootstrap-overrides.css">
+  <link rel="stylesheet" href="css/bootstrap-overrides.css" />
+  <link rel="stylesheet" href="css/spinner.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
+  <div class="loading"></div>
 
   <div id="main-container" class="container">
 
+    <!-- Jumbotron Start -->
     <div class="jumbotron">
       <h1 class="display-3">BruinMap</h1>
       <p class="lead">An open-source map to help you navigate campus quickly and efficiently.</p>
     </div>
+    <!-- Jumbotron End -->
 
+    <!-- Map Start -->
+    <div class="row">
+      <div id='map' class="col-xs-10 col-xs-offset-1">
+        <script>
+        var map;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: -34.397, lng: 150.644},
+            zoom: 8
+          });
+        }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDO9uBJZScu7CxOXONMETFH3fG_VkPhj4&callback=initMap"
+        async defer></script>
+      </div>
+    </div>
+    <!-- Map End -->
+
+    <!-- Filters Panel Start -->
+    <div class="row top-buffer">
+      <div id="filters" class="col-xs-offset-3 col-xs-6 panel panel-default">
+        <div class="panel-heading">Data Filters</div>
+        <div class="panel-body">
+          <form role="form">
+            <div class="form-group col-xs-12 col-md-6">
+              <label for="timeFrameStart">Time Frame Start</label>
+              <input type="time" class="form-control" id="timeFrameStart" />
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+              <label for="timeFrameEnd">Time Frame End</label>
+              <input type="time" class="form-control" id="timeFrameEnd" />
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group col-xs-12 col-md-6">
+              <label for="dateFrameStart">Date Frame Start</label>
+              <input type="date" class="form-control" id="dateFrameStart" />
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+              <label for="dateFrameEnd">Date Frame End</label>
+              <input type="date" class="form-control" id="dateFrameEnd" />
+            </div>
+            <div class="form-check col-xs-12 col-md-6">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" id="animate" value="">
+                &nbsp;Animate Data?
+              </label>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-12 col-md-6 submit-btn">
+              <button type="button" class="btn btn-primary">Refresh</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Filters Panel End -->
+
+  </div>
+
+  <div id="footer" class="container-fluid top-buffer">
+    Made for UCLA Computer Science M117.
   </div>
 
 </body>
