@@ -2,7 +2,3 @@ Header set Access-Control-Allow-Origin "*"
 
 DirectoryIndex index.html
 
-AuthType Basic
-AuthName "BruinMap"
-AuthUserFile /Users/Daniel/Desktop/bruinmap/.htpasswd
-Require valid-user
