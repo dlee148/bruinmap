@@ -12,31 +12,31 @@ if (mysqli_connect_errno()) {
 }
 
 // Form query
-$count = 0;
-$query = "SELECT * FROM $table";
+$param_count = 0;
+$query = "SELECT latitude,longitude FROM $table";
 
 if (!empty($_GET['dateFrameStart'])) {
-  $query .= ' WHERE time_stamp >= "' . mysqli_real_escape_string($link, $_GET['dateFrameStart']) . '"';
+  $query .= ' WHERE time_stamp >= "' . mysqli_real_escape_string($link, $_GET['dateFrameStart']) . ' 00:00:00"';
 
-  $count++;
+  $param_count++;
 }
 if (!empty($_GET['dateFrameEnd'])) {
-  $query .= ($count == 0 ? ' WHERE' : '');
-  $query .= ($count > 0 ? ' AND' : '');
-  $query .= ' time_stamp <= "' . mysqli_real_escape_string($link, $_GET['dateFrameEnd']) . '"';
+  $query .= ($param_count == 0 ? ' WHERE' : '');
+  $query .= ($param_count > 0 ? ' AND' : '');
+  $query .= ' time_stamp <= "' . mysqli_real_escape_string($link, $_GET['dateFrameEnd']) . ' 23:59:59"';
 
-  $count++;
+  $param_count++;
 }
 if (!empty($_GET['timeFrameStart'])) {
-  $query .= ($count == 0 ? ' WHERE' : '');
-  $query .= ($count > 0 ? ' AND' : '');
+  $query .= ($param_count == 0 ? ' WHERE' : '');
+  $query .= ($param_count > 0 ? ' AND' : '');
   $query .= ' TIME(time_stamp) >= "' . mysqli_real_escape_string($link, $_GET['timeFrameStart']) . ':00"';
 
-  $count++;
+  $param_count++;
 }
 if (!empty($_GET['timeFrameEnd'])) {
-  $query .= ($count == 0 ? ' WHERE' : '');
-  $query .= ($count > 0 ? ' AND' : '');
+  $query .= ($param_count == 0 ? ' WHERE' : '');
+  $query .= ($param_count > 0 ? ' AND' : '');
   $query .= ' TIME(time_stamp) <= "' . mysqli_real_escape_string($link, $_GET['timeFrameEnd']). ':59"';
 }
 
