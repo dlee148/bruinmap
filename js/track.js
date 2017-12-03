@@ -12,8 +12,6 @@ function parseData(data) {
 }
 
 function calculateCenter(data) {
-  // TODO: Moving average
-
   var long = {min: data[0].longitude, max: data[0].longitude};
   var lat  = {min: data[0].latitude, max: data[0].latitude};
 
@@ -38,10 +36,7 @@ function uploadCoords(position) {
     timestamp: position.timestamp - 32400000
   };
 
-  $.post("php/track.php", data, function(data, status, xhr) {
-    console.log("Track - " + String(xhr.status));
-    // TODO: do something with status
-  });
+  $.post("php/track.php", data)
 }
 
 function getLocation() {
@@ -68,11 +63,24 @@ function populateMap(points, animate) {
     for (var i = 0; i < points.length; i++) {
       (function(point, i, interval) {
         setTimeout(function() {
-          markers.push(new google.maps.Marker({
+          var marker = new google.maps.Marker({
             position: {lat: point.latitude, lng: point.longitude},
             map: map,
             icon: 'img/marker.png'
-          }));
+          });
+
+          var contentString = '<div><p>' + point.latitude + ', ' + point.longitude + '<br />' + point.time_stamp + '</p></div>';
+          var infoWindow = new google.maps.InfoWindow({content: contentString});
+
+          marker.addListener('mouseover', function() {
+            infoWindow.open(map, marker);
+          });
+
+          marker.addListener('mouseout', function() {
+            infoWindow.close(map, marker);
+          });
+
+          markers.push(marker);
 
           if (i === points.length - 1) {
             $('#refresh').prop('disabled', false);
@@ -83,11 +91,24 @@ function populateMap(points, animate) {
   }
   else {
     points.forEach(function(point) {
-      markers.push(new google.maps.Marker({
+      var marker = new google.maps.Marker({
         position: {lat: point.latitude, lng: point.longitude},
         map: map,
         icon: 'img/marker.png'
-      }));
+      });
+
+      var contentString = '<div><p>' + point.latitude + ', ' + point.longitude + '<br />' + point.time_stamp + '</p></div>';
+      var infoWindow = new google.maps.InfoWindow({content: contentString});
+
+      marker.addListener('mouseover', function() {
+        infoWindow.open(map, marker);
+      });
+
+      marker.addListener('mouseout', function() {
+        infoWindow.close(map, marker);
+      });
+
+      markers.push(marker);
     });
 
     $('#refresh').prop('disabled', false);

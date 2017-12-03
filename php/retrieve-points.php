@@ -13,7 +13,7 @@ if (mysqli_connect_errno()) {
 
 // Form query
 $param_count = 0;
-$query = "SELECT latitude,longitude FROM $table";
+$query = "SELECT latitude,longitude,time_stamp FROM $table";
 
 if (!empty($_GET['dateFrameStart'])) {
   $query .= ' WHERE time_stamp >= "' . mysqli_real_escape_string($link, $_GET['dateFrameStart']) . ' 00:00:00"';
