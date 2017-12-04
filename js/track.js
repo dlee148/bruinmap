@@ -146,7 +146,14 @@ function retrievePoints() {
 $(document).ready(function() {
   $('#refresh').on('click', retrievePoints);
 
-  retrievePoints();
+  if (map) {
+    retrievePoints();
+  }
+  else {
+    $('.loading').hide();
+    $('#refresh').prop('disabled', false);
+  }
+
 
   if (navigator.geolocation) {
     setInterval(getLocation, INTERVAL);
