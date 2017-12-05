@@ -19,6 +19,9 @@
   <link rel="stylesheet" href="css/bootstrap-overrides.css" />
   <link rel="stylesheet" href="css/spinner.css" />
   <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="img/bruinmap.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -48,7 +51,7 @@
           heatmap = new google.maps.visualization.HeatmapLayer({
             data: generatePoints(center, 200),
             map: map
-          }); 
+          });
         }
         function generatePoints(center, num_points) {
           var lat = center.lat;
@@ -60,11 +63,11 @@
             var new_lat = lat + random_1;
             var new_lng = lng + random_2;
             var new_point = new google.maps.LatLng(new_lat, new_lng);
-            points.push(new_point); 
+            points.push(new_point);
 
-          } 
+          }
           return points;
-        }; 
+        };
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDO9uBJZScu7CxOXONMETFH3fG_VkPhj4&callback=initMap&libraries=visualization"
         async defer></script>
