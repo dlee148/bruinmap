@@ -36,7 +36,7 @@ function uploadCoords(position) {
     timestamp: position.timestamp - 32400000
   };
 
-  $.post("php/track.php", data)
+  $.post("php/track.php", data);
 }
 
 function getLocation() {
@@ -131,6 +131,7 @@ function retrievePoints() {
   $.get("php/retrieve-points.php", parameters, function(data, status, xhr) {
     data = parseData(data);
     if (data.length === 0) {
+      clearPoints();
       $('.loading').hide();
       $('#refresh').prop('disabled', false);
       return;

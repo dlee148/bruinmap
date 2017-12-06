@@ -48,26 +48,7 @@
             center: center,
             zoom: 14
           });
-          heatmap = new google.maps.visualization.HeatmapLayer({
-            data: generatePoints(center, 200),
-            map: map
-          });
         }
-        function generatePoints(center, num_points) {
-          var lat = center.lat;
-          var lng = center.lng;
-          var points = [];
-          for (i = 0; i < num_points; i++) {
-            var random_1 = (Math.random()*2-1) / 100;
-            var random_2 = (Math.random()*2-1) / 100;
-            var new_lat = lat + random_1;
-            var new_lng = lng + random_2;
-            var new_point = new google.maps.LatLng(new_lat, new_lng);
-            points.push(new_point);
-
-          }
-          return points;
-        };
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDO9uBJZScu7CxOXONMETFH3fG_VkPhj4&callback=initMap&libraries=visualization"
         async defer></script>
@@ -98,7 +79,7 @@
             </div>
             <div class="form-check col-xs-12 col-md-6">
               <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="animate" value="">
+                <input class="form-check-input" type="checkbox" id="animate" value="" />
                 &nbsp;Animate Data?
               </label>
             </div>
